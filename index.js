@@ -10,7 +10,7 @@ const { readData } = require("./gs_funcs");
 
 const { getInavData } = require('./inavFetcher');
 
-var job = new nodeCron("47 12 * * 1-5", async function getData() {
+var job = new nodeCron("45 8 * * 1-5", async function getData() {
   const filters = [{ filterType: "simple" }];
   config.eodData = await readData(
     "iifl_data_mapping",
@@ -28,7 +28,6 @@ var job = new nodeCron("47 12 * * 1-5", async function getData() {
   }
   data = JSON.stringify(data)
   const res = await axios.post(process.env.UPDATE_DATA_URL, data)
-  //console.log(res)
 },null,true,'Asia/Kolkata')
 
 job.start()
